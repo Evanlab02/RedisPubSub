@@ -1,4 +1,4 @@
-site_name: Smith
+site_name: RedisPubSub
 plugins:
   - search
 markdown_extensions:
