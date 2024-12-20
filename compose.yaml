@@ -1,0 +1,30 @@
+name: RedisPubSub
+
+services:
+  redis:
+    image: redis:7.4.1-alpine3.20
+    container_name: redis-container
+    ports:
+      - "6379:6379"
+    networks:
+      - redis-network
+
+  pub1:
+    build: ./src/publisher
+    container_name: redis-publisher-1
+    networks:
+      - redis-network
+    env_file:
+      - .env
+
+  sub:
+    build: ./src/subscriber
+    container_name: redis-subscriber
+    networks:
+      - redis-network
+    env_file:
+      - .env
+
+networks:
+  redis-network:
+    driver: bridge
